@@ -26,7 +26,7 @@ namespace AWSCostReportLambda
             var details = service.EditDetailsByResponse(response);
             var messages = service.EditMessage(details);
 
-            var webhookUrl = Environment.GetEnvironmentVariable("SlackIncomintWebhookUrl");
+            var webhookUrl = Environment.GetEnvironmentVariable("SlackIncomingWebhookUrl");
             await service.NotifyAsync(webhookUrl, messages);
 
             return messages;
