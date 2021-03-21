@@ -4,12 +4,12 @@
 AWSでコストレポートを参照できます。
 これを定期的に確認するのは手間がかかるので、Slackに通知を出す機能です。
 - コストレポート
-![cost-report](images/cost-report.png)
+![cost-report](images/cost-report.PNG)
 
 これを、slackに通知します。
 
 - Slack
-![slack](images/slack-notify.png)
+![slack](images/slack-notify.PNG)
 
 ## 実装
 Lambdaを使っています。
