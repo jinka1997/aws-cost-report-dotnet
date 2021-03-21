@@ -18,7 +18,7 @@ namespace AWSCostReportLambda.Services
 
         public async ValueTask<GetCostAndUsageResponse> GetByDate(DateTime start, DateTime end)
         {
-            var client = new AmazonCostExplorerClient(RegionEndpoint.APNortheast1);
+            var client = new AmazonCostExplorerClient();
             var request = new GetCostAndUsageRequest
             {
                 TimePeriod = new DateInterval()
@@ -51,8 +51,8 @@ namespace AWSCostReportLambda.Services
         public Dictionary<DateTime, IEnumerable<CostReportDetail>> EditDetailsByResponse(GetCostAndUsageResponse response)
         {
             return response.ResultsByTime.ToDictionary(
-                byDay => DateTime.ParseExact(byDay.TimePeriod.Start, "yyyy-MM-dd", null),
-                byDay => byDay.Groups.Select(x => new CostReportDetail(x.Keys.First(), decimal.Parse(x.Metrics.First().Value.Amount))));
+                x => DateTime.ParseExact(x.TimePeriod.Start, "yyyy-MM-dd", null),
+                x => x.Groups.Select(x => new CostReportDetail(x.Keys.First(), decimal.Parse(x.Metrics.First().Value.Amount))));
         }
         public async Task NotifyAsync(string webhookUrl, IEnumerable<string> messages)
         {
