@@ -1,0 +1,1 @@
+variable "slack_incoming_webhook_url" {}
