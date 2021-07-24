@@ -33,7 +33,7 @@ namespace AWSCostReportLambda.Services
             {
                 new GroupDefinition() { Key = "SERVICE", Type = GroupDefinitionType.DIMENSION }
             };
-            return  await client.GetCostAndUsageAsync(request);
+            return await client.GetCostAndUsageAsync(request);
 
         }
 
@@ -57,17 +57,16 @@ namespace AWSCostReportLambda.Services
         public async Task NotifyAsync(string webhookUrl, IEnumerable<string> messages)
         {
             var client = new SlackClient(webhookUrl);
-            var postMessage = new string[] {
-                "ボンビ～",
-                "リソース立ち上げてるとお金がかかっちゃうのねん！",
-                "社長さんに使用状況を教えてあげるのねん！",
-                "",
+            var postMessage = new List<string>
+            {
                 "```"
-            }.Concat(messages)
-            .Concat(new string[] { "```" });
-            var slackMessage = new SlackMessage() 
-            {  
-                Text = string.Join("\r\n", postMessage) ,
+            };
+            postMessage.AddRange(messages);
+            postMessage.Add("```");
+
+            var slackMessage = new SlackMessage()
+            {
+                Text = string.Join("\r\n", postMessage),
             };
             _ = await client.PostAsync(slackMessage);
         }
