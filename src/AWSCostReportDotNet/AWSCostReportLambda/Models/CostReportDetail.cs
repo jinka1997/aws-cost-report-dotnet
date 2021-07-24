@@ -25,6 +25,10 @@ namespace AWSCostReportLambda.Models
                 { "Amazon Elastic Load Balancing", "ELB" },
                 { "Amazon Simple Notification Service", "SNS" },
                 { "Amazon Simple Queue Service", "SQS" },
+                { "Amazon EC2 Container Registry (ECR)", "ECR" },
+                { "Amazon Elastic File System", "EFS" },
+                { "Amazon DynamoDB", "DynamoDB" },
+                { "AWS App Runner", "AppRunner" },
             };
 
             ServiceName = serviceName;

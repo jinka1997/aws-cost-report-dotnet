@@ -1,4 +1,4 @@
-using Amazon.Lambda.Core;
+﻿using Amazon.Lambda.Core;
 using AWSCostReportLambda.Services;
 using System;
 using System.Collections.Generic;
