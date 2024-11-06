@@ -17,11 +17,8 @@ public class Function
 	/// <returns></returns>
 	public async ValueTask<string> FunctionHandler(string input, ILambdaContext context)
 	{
-		//var dailySummaryByResourceSpan = int.Parse(Environment.GetEnvironmentVariable("DailySummaryByResourceSpan")!);
-		//var webhookUrl = Environment.GetEnvironmentVariable("SlackWebhookUrl")!;
-
-		var dailySummaryByResourceSpan = 10;
-		var webhookUrl = "https://hooks.slack.com/services/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";
+		var dailySummaryByResourceSpan = int.Parse(Environment.GetEnvironmentVariable("DailySummaryByResourceSpan")!);
+		var webhookUrl = Environment.GetEnvironmentVariable("SlackWebhookUrl")!;
 
 		var today = DateTime.Today;
 		var firstDayOfMonth = new DateTime(today.Year, today.Month, 1);

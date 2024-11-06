@@ -15,12 +15,13 @@
     "image-command"        : "AWSCostReport::AWSCostReport.Function::FunctionHandler",
     "docker-host-build-output-dir" : "./bin/Release/lambda-publish",
     "function-name"                : "cost-report-f",
-    "function-role"                : "arn:aws:iam::381492137918:role/service-role/start-instance-role-68uti6f7",
+    "function-role"                : "arn:aws:iam::381492137918:role/service-role/cost-report-role",
     "function-architecture"        : "x86_64",
     "function-subnets"             : "",
     "function-security-groups"     : "",
     "tracing-mode"                 : "PassThrough",
-    "environment-variables"        : "",
+    "environment-variables"        : "\"SlackWebhookUrl\"=\"https://hooks.slack.com/services/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\";\"DailySummaryByResourceSpan\"=\"10\"",
     "dockerfile"                   : "Dockerfile",
-    "image-tag"                    : "cost-report:latest"
+    "image-tag"                    : "cost-report:latest",
+    "function-description"         : ""
 }
