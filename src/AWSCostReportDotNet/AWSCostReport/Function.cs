@@ -18,14 +18,17 @@ public class Function
 	public async ValueTask<string> FunctionHandler(string input, ILambdaContext context)
 	{
 		var dailySummaryByResourceSpan = int.Parse(Environment.GetEnvironmentVariable("DailySummaryByResourceSpan")!);
-		var webhookUrl = Environment.GetEnvironmentVariable("SlackWebhookUrl")!;
+		var jpyUsdRate = decimal.Parse(Environment.GetEnvironmentVariable("JpyUsdRate")!);
+		var webhookUrlParameterStoreKey = Environment.GetEnvironmentVariable("SlackWebhookUrl_ParameterStoreKey")!;
+
 
 		var today = DateTime.Today;
 		var firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
 
 		var response = await CostReportService.GetByDateAsync(firstDayOfMonth, today);
 		var costDetails = CostReportService.ConvertToCostDetail(response);
-		await NotifyService.NotifyDailySummaryAsync(webhookUrl, costDetails);
+		var webhookUrl = await ParameterService.GetParameterStoreValue(webhookUrlParameterStoreKey);
+		await NotifyService.NotifyDailySummaryAsync(webhookUrl, costDetails, jpyUsdRate);
 		await NotifyService.NotifyDailySummaryByResource(webhookUrl, costDetails, dailySummaryByResourceSpan);
 
 		return "OK";

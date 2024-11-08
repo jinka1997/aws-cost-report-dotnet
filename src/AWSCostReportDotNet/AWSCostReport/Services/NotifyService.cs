@@ -4,11 +4,12 @@ namespace AWSCostReport.Services
 {
 	public class NotifyService
 	{
-		public static async Task NotifyDailySummaryAsync(string webhookUrl, IEnumerable<CostDetail> costDetails)
+		public static async Task NotifyDailySummaryAsync(string webhookUrl, IEnumerable<CostDetail> costDetails, decimal jpyUsdRate)
 		{
 			var postMessage = new List<string>
 			{
-				$"Monthly Total: `{costDetails.Sum(x => x.Amount):#,##0.000}`",
+				$"Monthly Total(USD): `{costDetails.Sum(x => x.Amount):#,##0.000}`",
+				$"Monthly Total(JPY(1USD={jpyUsdRate}円)): `{costDetails.Sum(x => x.Amount * jpyUsdRate):#,##0.000}`",
 				"```",
 			};
 
@@ -36,7 +37,7 @@ namespace AWSCostReport.Services
 
 			var postMessage = new List<string>
 			{
-				$"直近{dailySummaryByResourceSpan}日間の日毎の明細",
+				$"直近{dailySummaryByResourceSpan}日間の日毎の明細(USD)",
 				"```",
 			};
 
@@ -47,7 +48,7 @@ namespace AWSCostReport.Services
 											.OrderByDescending(x => x.Amount);
 
 				var text = $"{date:M/dd(ddd)}:{details.Sum(x => x.Amount):#,##0.000}({string.Join(",", details.Select(x => $"{x.ServiceName}={x.Amount:#,##0.000}"))} )";
-				postMessage.Add(text);
+				postMessage.Add(text + "\r\n");
 			}
 			postMessage.Add("```");
 

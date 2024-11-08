@@ -20,7 +20,7 @@
     "function-subnets"             : "",
     "function-security-groups"     : "",
     "tracing-mode"                 : "PassThrough",
-    "environment-variables"        : "\"SlackWebhookUrl\"=\"https://hooks.slack.com/services/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\";\"DailySummaryByResourceSpan\"=\"10\"",
+    "environment-variables"        : "\"JpyUsdRate\"=\"160\";\"DailySummaryByResourceSpan\"=\"10\";\"SlackWebhookUrl_ParameterStoreKey\"=\"/SlackWebhookUrl/CostReport\"",
     "dockerfile"                   : "Dockerfile",
     "image-tag"                    : "cost-report:latest",
     "function-description"         : ""
