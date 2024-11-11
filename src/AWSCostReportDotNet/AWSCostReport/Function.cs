@@ -15,7 +15,7 @@ public class Function
 	/// <param name="input">The event for the Lambda function handler to process.</param>
 	/// <param name="context">The ILambdaContext that provides methods for logging and describing the Lambda environment.</param>
 	/// <returns></returns>
-	public async ValueTask<string> FunctionHandler(string input, ILambdaContext context)
+	public async ValueTask<string> FunctionHandler(ILambdaContext context)
 	{
 		var dailySummaryByResourceSpan = int.Parse(Environment.GetEnvironmentVariable("DailySummaryByResourceSpan")!);
 		var jpyUsdRate = decimal.Parse(Environment.GetEnvironmentVariable("JpyUsdRate")!);
